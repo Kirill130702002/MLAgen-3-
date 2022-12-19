@@ -91,7 +91,30 @@ public class RollerAgent : Agent
 ```
 
 Затем у сферы были настроенны компоненты ```Decision Requester, Behavior Parameters``` и добавлен файл конфигурации нейронной сети:
-```
+```yaml
+behaviors:
+  RollerBall:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 10
+      buffer_size: 100
+      learning_rate: 3.0e-4
+      beta: 5.0e-4
+      epsilon: 0.2
+      lambd: 0.99
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 128
+      num_layers: 2
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+    max_steps: 500000
+    time_horizon: 64
+    summary_freq: 10000
 ```
 
 после чего был запущен ml agent из anacond prompt, ниже предоставленно gif с результатом работы проекта(нажмите для проигрывания)
